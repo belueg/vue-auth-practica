@@ -30,4 +30,4 @@ content-type: application/json
 
 POST http://localhost:3200/tokenInfo HTTP/1.1
 content-type: application/json
-authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InBAcC5wIiwicm9sZSI6InVzZXIiLCJpYXQiOjE2MDcyNTAzOTAsImV4cCI6MTYwNzI1NzU5MH0.vJUwofXYBD-e7hSpefHNr-EGzQ5FxIqF7ytf-lLt6Ns
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InBAcC5wIiwicm9sZSI6InVzZXIiLCJpYXQiOjE2MDc1MDk1NjMsImV4cCI6MTYwNzUxNjc2M30.AoqzYfGhAcu31p9BoQ80GXNjdZMdecc3gWch98cvNmM

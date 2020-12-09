@@ -40,7 +40,7 @@ app.post('/login', (req, res) => {
 
     if (userExists.password == password) {
       const role = userExists.role
-
+console.log(role);
       const accessToken = generateAccessToken({ email, role })
 
       const refreshToken = jwt.sign({ email, role }, process.env.REFRESH_TOKEN)
