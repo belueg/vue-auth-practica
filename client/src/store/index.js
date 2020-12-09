@@ -44,7 +44,10 @@ export default new Vuex.Store({
     }
   },
   getters: {
-    isLoggedIn: state => state.user.isLoggedIn
+    isLoggedIn: state => state.user.isLoggedIn,
+
+    isAdmin: state => state.user.role === 'admin'
   },
+
   modules: {}
 })

@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-// import store from '@/store'
+import store from '../store/index'
 Vue.use(VueRouter)
 
 const routes = [
@@ -36,6 +36,19 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "userprofile" */ '../views/UserProfile.vue'),
     meta: { isPrivate: true }
+  },
+  {
+    path: '/adminpanel',
+    name: 'AdminPanel',
+    component: () =>
+      import(/* webpackChunkName: "adminpanel" */ '../views/AdminPanel.vue'),
+    meta: { onlyAdmins: true }
+  },
+  {
+    path: '/notallowed',
+    name: 'NotAllowed',
+    component: () =>
+      import(/* webpackChunkName: "notallowed" */ '../views/NotAllowed.vue')
   }
 ]
 
@@ -54,6 +67,11 @@ router.beforeEach((to, from, next) => {
     next('/profile')
   } else if (to.path === '/register' && isAuthenticated()) {
     next('/profile')
+  } else if (
+    (to.meta.onlyAdmins && store.getters.isAdmin === false) ||
+    (to.meta.onlyAdmins && isAuthenticated())
+  ) {
+    next('/notallowed')
   } else {
     next()
   }

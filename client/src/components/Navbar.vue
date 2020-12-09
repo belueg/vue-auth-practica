@@ -9,6 +9,10 @@
       Profile
     </RouterLink>
     <RouterLink to="/about">About</RouterLink>
+    <RouterLink to="/adminpanel" v-if="$store.getters.isAdmin">
+      Secret admin button
+    </RouterLink>
+
     <button @click="logout" v-if="$store.getters.isLoggedIn">log out</button>
   </div>
 </template>
