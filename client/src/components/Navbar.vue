@@ -1,15 +1,15 @@
 <template>
   <div class="navbar">
-    <router-link to="/" v-if="!this.$store.state.user"> Home</router-link>
-    <router-link to="/register" v-if="!this.$store.state.user"
-      >Register</router-link
-    >
-    <router-link to="/login" v-if="!this.$store.state.user">Login</router-link>
-    <router-link to="/profile" v-if="this.$store.state.user"
-      >Profile</router-link
-    >
-    <router-link to="/about">About</router-link>
-    <button @click="logout" v-if="this.$store.state.user">log out</button>
+    <RouterLink to="/" v-if="!$store.getters.isLoggedIn">Home</RouterLink>
+    <RouterLink to="/register" v-if="!$store.getters.isLoggedIn">
+      Register
+    </RouterLink>
+    <RouterLink to="/login" v-if="!$store.getters.isLoggedIn">Login</RouterLink>
+    <RouterLink to="/profile" v-if="$store.getters.isLoggedIn">
+      Profile
+    </RouterLink>
+    <RouterLink to="/about">About</RouterLink>
+    <button @click="logout" v-if="$store.getters.isLoggedIn">log out</button>
   </div>
 </template>
 
@@ -19,7 +19,7 @@ export default {
   methods: {
     logout() {
       localStorage.removeItem('token')
-      this.$store.commit('loggedOut')
+      this.$store.commit('logOut')
       this.$router.push('/')
     }
   }

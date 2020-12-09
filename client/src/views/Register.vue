@@ -3,18 +3,16 @@
     <h1>Register</h1>
     <div class="register m-3">
       <section class="register-container">
-        <b-field label="Email" type="" message="">
-          <b-input v-model="email" type="email" value="" maxlength="30">
-          </b-input>
-        </b-field>
+        <BField label="Email" type="" message="">
+          <BInput v-model="email" type="email" value="" maxlength="30" />
+        </BField>
 
-        <b-field label="Password">
-          <b-input v-model="password" type="password" value="" password-reveal>
-          </b-input>
-        </b-field>
-        <b-button @click="register" type="is-primary" class="mt-3"
-          >Register</b-button
-        >
+        <BField label="Password">
+          <BInput v-model="password" type="password" value="" password-reveal />
+        </BField>
+        <BButton @click="register" type="is-primary" class="mt-3">
+          Register
+        </BButton>
       </section>
     </div>
     <p>{{ message }}</p>
@@ -33,7 +31,7 @@ export default {
   },
   methods: {
     register() {
-      this.$api
+      this.$api()
         .register({ email: this.email, password: this.password })
 
         .then(({ data }) => {

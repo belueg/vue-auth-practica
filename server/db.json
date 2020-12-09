@@ -2953,7 +2953,23 @@
     },
     {
       "email": "bel@email.com",
-      "password": "123"
+      "password": "123",
+      "role": "admin"
+    },
+    {
+      "email": "p@p.p",
+      "password": "123",
+      "role": "user"
+    },
+    {
+      "email": "paujoanpr@gmail.com",
+      "password": "123123",
+      "role": "user"
+    },
+    {
+      "email": "b@email.com",
+      "password": "123",
+      "role": "user"
     }
   ]
 }

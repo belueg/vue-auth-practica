@@ -3,23 +3,19 @@
     <h1>Log in</h1>
     <div class="login">
       <section class=" login-container">
-        <b-field label="Email" type="" message="">
-          <b-input v-model="user.email" type="email" value="" maxlength="30">
-          </b-input>
-        </b-field>
+        <BField label="Email" type="" message="">
+          <BInput v-model="user.email" type="email" value="" maxlength="30" />
+        </BField>
 
-        <b-field label="Password">
-          <b-input
+        <BField label="Password">
+          <BInput
             v-model="user.password"
             type="password"
             value=""
             password-reveal
-          >
-          </b-input>
-        </b-field>
-        <b-button @click="login" type="is-primary" class="mt-3"
-          >Log in</b-button
-        >
+          />
+        </BField>
+        <BButton @click="login" type="is-primary" class="mt-3">Log in</BButton>
       </section>
     </div>
   </div>
