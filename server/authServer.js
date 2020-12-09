@@ -39,9 +39,11 @@ app.post('/login', (req, res) => {
       return res.json({ error: 'Invalid credentials' })
 
     if (userExists.password == password) {
-      const accessToken = generateAccessToken({ email })
+      const role = userExists.role
+console.log(role);
+      const accessToken = generateAccessToken({ email, role })
 
-      const refreshToken = jwt.sign({ email }, process.env.REFRESH_TOKEN)
+      const refreshToken = jwt.sign({ email, role }, process.env.REFRESH_TOKEN)
       // res.json({ accessToken, refreshToken })
 
       refreshTokens.push(refreshToken)
@@ -49,7 +51,9 @@ app.post('/login', (req, res) => {
       return res.json({
         msg: 'Successfully logged in!',
         accessToken,
-        refreshToken
+        refreshToken, 
+        role,
+        email
       })
     }
   } catch (err) {
@@ -58,8 +62,8 @@ app.post('/login', (req, res) => {
   }
 })
 
-function generateAccessToken({ email }) {
-  return jwt.sign({ email }, process.env.ACCESS_TOKEN, {
+function generateAccessToken({ email, role }) {
+  return jwt.sign({ email, role }, process.env.ACCESS_TOKEN, {
     expiresIn: '2h'
   })
 }
@@ -73,7 +77,7 @@ app.post('/register', (req, res) => {
         error: 'user already exists'
       })
     }
-    db.get('users').push({ email, password }).write()
+    db.get('users').push({ email, password, role: 'user' }).write()
     return res.json({ message: 'succesfully saved' })
   } catch (error) {
     console.log('🚀 ~ file: index.js ~ line 34 ~ app.post ~ error', error)

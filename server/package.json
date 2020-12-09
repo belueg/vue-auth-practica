@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "nodemon": "nodemon --ignore db.json  index.js",
-    "authServer": "nodemon --ignore db.json --inspect authServer.js"
+    "server": "nodemon --ignore db.json index.js",
+    "server:debug": "nodemon --ignore db.json --inspect index.js",
+    "authServer": "nodemon --ignore db.json authServer.js",
+    "authServer:debug": "nodemon --ignore db.json --insepct authServer.js"
   },
   "author": "",
   "license": "ISC",

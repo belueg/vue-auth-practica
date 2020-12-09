@@ -1,37 +1,53 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import api from '@/api/api'
+import api from '../api/api'
 import router from '../router'
+// import createPersistedState from 'vuex-persistedstate'
+import baseUserState from './baseUserState'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    user: null
+    user: {
+      role: null,
+      email: null,
+      isLoggedIn: false
+    }
   },
   mutations: {
-    isLoggedIn(state, token) {
-      if (localStorage.token === token) {
-        state.user = true
-      }
+    logOut(state) {
+      state.user = baseUserState
     },
-    loggedOut(state) {
-      if (!localStorage.token) {
-        state.user = null
-      }
+    setUserData(state, userData) {
+      state.user = { ...state.user, ...userData, isLoggedIn: true }
     }
   },
   actions: {
     login({ commit }, user) {
-      api
+      api()
         .login(user)
         .then(({ data }) => {
-          console.log(data)
+          console.log('data', { ...data })
           localStorage.setItem('token', data.accessToken)
-          commit('isLoggedIn', data.accessToken)
+          commit('setUserData', { email: data.email, role: data.role })
           router.push('/profile')
         })
         .catch(err => console.log(err))
+    },
+    getUserData({ commit }) {
+      api()
+        .userData()
+        .then(({ data: { email, role } }) =>
+          commit('setUserData', { email, role })
+        )
+        .catch(err => console.log(err))
     }
   },
+  getters: {
+    isLoggedIn: state => state.user.isLoggedIn,
+
+    isAdmin: state => state.user.role === 'admin'
+  },
+
   modules: {}
 })

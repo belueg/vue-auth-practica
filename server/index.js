@@ -17,6 +17,7 @@ require('dotenv').config()
 db.defaults({ posts: [], users: [] }).write()
 
 app.post('/tokenInfo', authToken, (req, res) => {
+  console.log('🚀index.js ~ line:20 ~ app.post ~ req.user', req.user)
   res.json(req.user)
 })
 
@@ -26,7 +27,7 @@ app.get('/', (req, res) => {
 
 app.get('/posts', authToken, (req, res) => {
   try {
-    console.log(req.user)
+    console.log('req.user ->', req.user)
     const posts = db.get('posts').value()
     return res.json(posts)
   } catch (error) {
@@ -37,11 +38,14 @@ app.get('/posts', authToken, (req, res) => {
 
 function authToken(req, res, next) {
   try {
+    console.log('auth-header: ', req.headers.authorization)
     const token = req.headers.authorization.split(' ')[1]
 
     jwt.verify(token, process.env.ACCESS_TOKEN, (err, user) => {
       if (err) return res.sendStatus(403)
       req.user = user
+      console.log(req.user)
+      console.log(user)
       next()
     })
   } catch (error) {
